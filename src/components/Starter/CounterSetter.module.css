@@ -1,0 +1,67 @@
+.counter1 {
+    padding: 10px;
+    border: #61dafb solid 2px;
+    border-radius: 10px;
+    margin: 5%;
+}
+
+.inputblock {
+    text-align: center;
+    background-color: #61dafb;
+    padding: 25px 25px;
+    border: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.btnField {
+    display: flex;
+    justify-content: center;
+    border: #61dafb solid 2px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.label {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.min {
+    margin-left: 10px ;
+    border: #424242 2px solid;
+    border-radius: 5px;
+    padding: 5px ;
+    text-align: center;
+    font-weight: bold;
+}
+
+.errorMin {
+    background-color: red;
+    margin-left: 10px ;
+    border: #424242 2px solid;
+    border-radius: 5px;
+    padding: 5px ;
+    text-align: center;
+    font-weight: bold;
+}
+
+.max {
+    margin-left: 5px ;
+    border: #424242 2px solid;
+    border-radius: 5px;
+    padding: 5px ;
+    text-align: center;
+    font-weight: bold;
+}
+
+.errorMax {
+    background-color: red;
+    margin-left: 5px ;
+    border: #424242 2px solid;
+    border-radius: 5px;
+    padding: 5px ;
+    text-align: center;
+    font-weight: bold;
+}

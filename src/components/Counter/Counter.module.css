@@ -1,0 +1,36 @@
+.counter {
+    padding: 10px;
+    border: #61dafb solid 2px;
+    border-radius: 10px;
+    margin: 5%;
+}
+
+.value {
+    text-align: center;
+    background-color: #61dafb;
+    padding: 55px;
+    border: 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.valueError {
+    color: red;
+    text-align: center;
+    background-color: #61dafb;
+    padding: 55px;
+    border: 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.btnField {
+    display: flex;
+    justify-content: center;
+    border: #61dafb solid 2px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 1px 30px;
+}
