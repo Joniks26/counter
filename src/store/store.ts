@@ -1,4 +1,4 @@
-import {combineReducers, createStore, Store} from "redux";
+import {combineReducers, createStore} from "redux";
 import {
     counterReducer,
     setDisableSetButtonAC,
@@ -6,6 +6,7 @@ import {
     setMaxValueAC,
     setMinValueAC, setStartDisAC
 } from "./counterReducer";
+import {loadState, saveState} from "./localStorage";
 
 export type ActionValuesType =
     ReturnType<typeof setDataAC> |
@@ -16,8 +17,15 @@ export type ActionValuesType =
     ReturnType<typeof setStartDisAC> |
     ReturnType<typeof setDisableSetButtonAC>
 
-let RootReducer = combineReducers({counter: counterReducer})
-export const store: Store<RootStateType, ActionValuesType> = createStore(RootReducer)
+const RootReducer = combineReducers({counter: counterReducer})
+
+export const store = createStore(RootReducer, loadState())
+
+store.subscribe(() => {
+    saveState({
+        counter: store.getState().counter
+    })
+})
 
 export type RootStateType = ReturnType<typeof RootReducer>
 

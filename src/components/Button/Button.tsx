@@ -1,5 +1,6 @@
 import React from "react";
-import s from './Button.module.css'
+import s from './Button.module.css';
+
 
 export type ButtonType = {
     disabled: boolean
@@ -8,9 +9,5 @@ export type ButtonType = {
 }
 
 export const Button = (props: ButtonType) => {
-    return (
-        <button disabled={props.disabled}
-                onClick={props.callback}
-                className={s.button}>{props.title}</button>
-    )
+    return <button disabled={props.disabled} onClick={props.callback} className={s.button}>{props.title}</button>
 }
