@@ -29,39 +29,39 @@
 }
 
 .min {
-    margin-left: 10px ;
+    margin-left: 10px;
     border: #424242 2px solid;
     border-radius: 5px;
-    padding: 5px ;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
 }
 
 .errorMin {
     background-color: red;
-    margin-left: 10px ;
+    margin-left: 10px;
     border: #424242 2px solid;
     border-radius: 5px;
-    padding: 5px ;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
 }
 
 .max {
-    margin-left: 5px ;
+    margin-left: 5px;
     border: #424242 2px solid;
     border-radius: 5px;
-    padding: 5px ;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
 }
 
 .errorMax {
     background-color: red;
-    margin-left: 5px ;
+    margin-left: 5px;
     border: #424242 2px solid;
     border-radius: 5px;
-    padding: 5px ;
+    padding: 5px;
     text-align: center;
     font-weight: bold;
 }

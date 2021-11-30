@@ -17,9 +17,9 @@ let initialState = {
     startDis: true,
     setButton: false
 }
-type InitialStateType=typeof initialState
+type InitialStateType = typeof initialState
 
-export const counterReducer = (state:InitialStateType = initialState, action: ActionValuesType): InitialStateType => {
+export const counterReducer = (state: InitialStateType = initialState, action: ActionValuesType): InitialStateType => {
     switch (action.type) {
         case SET_DATA:
             return {...state, data: action.data}

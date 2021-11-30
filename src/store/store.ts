@@ -7,19 +7,19 @@ import {
     setMinValueAC, setStartDisAC
 } from "./counterReducer";
 
-export type ActionValuesType=
-    ReturnType<typeof setDataAC>|
-    ReturnType<typeof setMinValueAC>|
-    ReturnType<typeof setMaxValueAC>|
-    ReturnType<typeof setDataStringAC>|
-    ReturnType<typeof setDisableButtonAC>|
-    ReturnType<typeof setStartDisAC>|
+export type ActionValuesType =
+    ReturnType<typeof setDataAC> |
+    ReturnType<typeof setMinValueAC> |
+    ReturnType<typeof setMaxValueAC> |
+    ReturnType<typeof setDataStringAC> |
+    ReturnType<typeof setDisableButtonAC> |
+    ReturnType<typeof setStartDisAC> |
     ReturnType<typeof setDisableSetButtonAC>
 
-let RootReducer = combineReducers({counter:counterReducer})
-export const store: Store <RootStateType,ActionValuesType> = createStore(RootReducer)
+let RootReducer = combineReducers({counter: counterReducer})
+export const store: Store<RootStateType, ActionValuesType> = createStore(RootReducer)
 
-export type RootStateType=ReturnType<typeof RootReducer>
+export type RootStateType = ReturnType<typeof RootReducer>
 
 
 

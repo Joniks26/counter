@@ -14,17 +14,13 @@ export type CounterType = {
 }
 
 export function Counter(props: CounterType) {
-
     const disRes = props.dataMax < 0 || props.dataMin < 0 || props.dataMax === props.dataMin || props.dataMin > props.dataMax || props.startDis
     const error = disRes || props.dataMax === props.data
     const counter = !props.set ? props.dataString : props.data
 
-
-
-
     return (
         <div className={s.counter}>
-            <div className={error? s.valueError : s.value}>{counter}</div>
+            <div className={error ? s.valueError : s.value}>{counter}</div>
             <div className={s.btnField}>
                 <Button title={"inc"}
                         disabled={error}

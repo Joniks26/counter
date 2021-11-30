@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {CounterSetter} from "./components/Setter/CounterSetter";
 import {Counter} from "./components/Counter/Counter";
 import s from './App.module.css';
@@ -12,9 +12,7 @@ import {
     setMaxValueAC, setStartDisAC
 } from "./store/counterReducer";
 
-
 function App() {
-
     const dataMin = useSelector<RootStateType, number>(state => state.counter.inputValueMin)
     const dataMax = useSelector<RootStateType, number>(state => state.counter.inputValueMax)
     const dataString = useSelector<RootStateType, string>(state => state.counter.dataString)
