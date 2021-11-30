@@ -8,17 +8,16 @@ export type CounterType = {
     data: number
     dataString: string
     set: boolean
-    update: () => void
+    inc: () => void
     reset: () => void
     startDis: boolean
 }
 
 export function Counter(props: CounterType) {
 
-    let disInc = props.dataMax < 0 || props.dataMin < 0 || props.dataMax === props.dataMin || props.dataMin > props.dataMax || props.dataMax === props.data || props.startDis ? true : false
-    let disRes = props.dataMax < 0 || props.dataMin < 0 || props.dataMax === props.dataMin || props.dataMin > props.dataMax || props.startDis ? true : false
-    let counter = props.set === false ? props.dataString : props.data
-    let error = props.dataMax < 0 || props.dataMin < 0 || props.dataMax === props.dataMin || props.dataMin > props.dataMax || props.dataMax === props.data ? true : false
+    const disRes = props.dataMax < 0 || props.dataMin < 0 || props.dataMax === props.dataMin || props.dataMin > props.dataMax || props.startDis
+    const error = disRes || props.dataMax === props.data
+    const counter = !props.set ? props.dataString : props.data
 
 
 
@@ -28,11 +27,11 @@ export function Counter(props: CounterType) {
             <div className={error? s.valueError : s.value}>{counter}</div>
             <div className={s.btnField}>
                 <Button title={"inc"}
-                        disabled={disInc}
-                        Callback={props.update}/>
+                        disabled={error}
+                        callback={props.inc}/>
                 <Button title={"reset"}
                         disabled={disRes}
-                        Callback={props.reset}/>
+                        callback={props.reset}/>
             </div>
         </div>
     );

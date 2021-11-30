@@ -1,152 +1,86 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {CounterSetter} from "./components/Starter/CounterSetter";
+import {CounterSetter} from "./components/Setter/CounterSetter";
 import {Counter} from "./components/Counter/Counter";
 import s from './App.module.css';
+import {RootStateType} from "./store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    setDisableSetButtonAC,
+    setDisableButtonAC,
+    setDataAC, setDataStringAC,
+    setMinValueAC,
+    setMaxValueAC, setStartDisAC
+} from "./store/counterReducer";
 
 
 function App() {
 
-    let [data, setData] = useState(0)
-    const [inputValueMin, setinputValueMin] = useState(0)
-    const [inputValueMax, setinputValueMax] = useState(0)
-    let [dataString, setDataString] = useState("error value!")
-    let [buttonDis, setbuttonDis] = useState(false)
-    let [startDis, setStartDis] = useState(true)
-    let dataMin = inputValueMin
-    let dataMax = inputValueMax
+    const dataMin = useSelector<RootStateType, number>(state => state.counter.inputValueMin)
+    const dataMax = useSelector<RootStateType, number>(state => state.counter.inputValueMax)
+    const dataString = useSelector<RootStateType, string>(state => state.counter.dataString)
+    const buttonDis = useSelector<RootStateType, boolean>(state => state.counter.buttonDis)
+    const startDis = useSelector<RootStateType, boolean>(state => state.counter.startDis)
+    const set = useSelector<RootStateType, boolean>(state => state.counter.setButton)
+    let data = useSelector<RootStateType, number>(state => state.counter.data)
 
-    let onChangeValueMin = (e: ChangeEvent<HTMLInputElement>) => {
+    const dispatch = useDispatch()
+
+    const onChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
         const minValue = +e.currentTarget.value
-        setinputValueMin(minValue)
-        setbuttonDis(false)
+        dispatch(setMinValueAC(minValue))
+        dispatch(setDisableButtonAC(false))
 
         if (dataMax <= 0 || minValue < 0 || minValue >= dataMax) {
-            setDataString("error")
+            dispatch(setDataStringAC("ERROR"))
         } else {
-            setDataString("set value")
+            dispatch(setDataStringAC("SET VALUE"))
         }
     }
 
-    let onChangeValueMax = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const maxValue = +e.currentTarget.value
-        setinputValueMax(maxValue)
-        setbuttonDis(false)
+        dispatch(setMaxValueAC(maxValue))
+        dispatch(setDisableButtonAC(false))
 
         if (maxValue <= 0 || dataMin < 0 || dataMin >= maxValue) {
-            setDataString("error")
+            dispatch(setDataStringAC("ERROR"))
         } else {
-            setDataString("set value")
+            dispatch(setDataStringAC("SET VALUE"))
         }
     }
 
-    let [set, setSet] = useState(false)
-
-    const upDate = () => {
-        const count = data + 1
+    const increment = () => {
         if (data < dataMax)
-            setData(count)
+            dispatch(setDataAC(data + 1))
     }
-    const upReset = () => {
-        setData(data = 0)
-        setSet(false)
-        setStartDis(true)
+    const reset = () => {
+        dispatch(setDataAC(data))
+        dispatch(setDisableSetButtonAC(false))
+        dispatch(setStartDisAC(true))
     }
-    let onSet = () => {
-        setData(inputValueMin)
-        setbuttonDis(!buttonDis)
-        setSet(true)
-        setStartDis(false)
+    const setValue = () => {
+        dispatch(setDataAC(dataMin))
+        dispatch(setDisableButtonAC(!buttonDis))
+        dispatch(setDisableSetButtonAC(true))
+        dispatch(setStartDisAC(false))
     }
-
-    useEffect(() => {
-        let str = localStorage.getItem("inputValueMin")
-        if (str) {
-            let num = JSON.parse(str)
-            setinputValueMin(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("inputValueMin", JSON.stringify(inputValueMin))
-    }, [inputValueMin])
-    useEffect(() => {
-        let str = localStorage.getItem("inputValueMax")
-        if (str) {
-            let num = JSON.parse(str)
-            setinputValueMax(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("inputValueMax", JSON.stringify(inputValueMax))
-    }, [inputValueMax])
-    useEffect(() => {
-        let str = localStorage.getItem("set")
-        if (str) {
-            let num = JSON.parse(str)
-            setSet(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("set", JSON.stringify(set))
-    }, [set])
-    useEffect(() => {
-        let str = localStorage.getItem("data")
-        if (str) {
-            let num = JSON.parse(str)
-            setData(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("data", JSON.stringify(data))
-    }, [data])
-    useEffect(() => {
-        let str = localStorage.getItem("dataString")
-        if (str) {
-            let num = JSON.parse(str)
-            setDataString(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("dataString", JSON.stringify(dataString))
-    }, [dataString])
-    useEffect(() => {
-        let str = localStorage.getItem("buttonDis")
-        if (str) {
-            let num = JSON.parse(str)
-            setbuttonDis(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("buttonDis", JSON.stringify(buttonDis))
-    }, [buttonDis])
-    useEffect(() => {
-        let str = localStorage.getItem("startDis")
-        if (str) {
-            let num = JSON.parse(str)
-            setStartDis(num)
-        }
-    }, [])
-    useEffect(() => {
-        localStorage.setItem("startDis", JSON.stringify(startDis))
-    }, [startDis])
 
     return (
         <div className={s.App}>
-            <CounterSetter dataMax={dataMax}
+            <CounterSetter buttonDis
+                           dataMax={dataMax}
                            dataMin={dataMin}
-                           buttonDis={buttonDis}
-                           inputValueMax={inputValueMax}
-                           inputValueMin={inputValueMin}
-                           set={onSet}
-                           onChangeValueMax={onChangeValueMax}
-                           onChangeValueMin={onChangeValueMin}
+                           set={setValue}
+                           ChangeMaxValue={onChangeMaxValue}
+                           ChangeMinValue={onChangeMinValue}
             />
             <Counter dataMax={dataMax}
                      dataMin={dataMin}
                      data={data}
                      dataString={dataString}
                      set={set}
-                     update={upDate}
-                     reset={upReset}
+                     inc={increment}
+                     reset={reset}
                      startDis={startDis}/>
         </div>
     );
